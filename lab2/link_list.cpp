@@ -1,3 +1,5 @@
+//Hiranmay Das
+//Roll-1711061
 #include<iostream>
 using namespace std;
 
@@ -123,94 +125,92 @@ void l_list::insert(int data){
 	temp->data=data;// inserting the data at the objectk
 	if (head == NULL){ //if the list is empty 
 		head=temp; // head will point temp  
-		tail =temp;
-		temp->next=NULL;
+		tail =temp; //tail will point temp
+		temp->next=NULL; //making next of temp to NULL
 	}
 	else {
-		tail->next= temp;
-		temp->next=NULL;
-		tail = temp;
+		tail->next= temp; //making link with new object to tail
+		temp->next=NULL; //making the next of new element to NULL
+		tail = temp; //pointing tail to the new element
 	}	
-	count++;
+	count++; //incrementing the count as a new element is added
 }
 void l_list::insert_at(int data, int pos){
 	if(pos<=count+1){
-	node* pos1;
+	node* pos1; // pointer to point the previous of  nth  element where n=pos
 	pos1=head;
-	node* pos2;
-	pos2=NULL;
-	node *temp;
-	temp->data=data;
+	node* pos2; //point to point the nth element 
+	pos2=NULL;  // making the pos2 to be null
+	node *temp; //declaring a new object which is to be added to the link
+	temp->data=data; // inserting data to the newly created node
 	for (int i = 2; i<pos; i++ ){
-		pos1= pos1->next;
+		pos1= pos1->next; //this loop is to point the pos1 to the n-1 th node
 	}
-	pos2= pos1->next;
-	pos1->next =temp;
-	temp->next=pos2;	
-	count++;
+	pos2= pos1->next; //pointing nth node
+	pos1->next =temp; //adding the new node at the end of n-1th node, now new node is nth node
+	temp->next=pos2;	 //linking new node with the previous nth node
+	count++; //because new element gets added 
 	}
 	else cout<<"YOU DON'T HAVE THAT MUCH NUMBER OF ELEMENT."<<endl;
 }
 void l_list::delt(){
-	if(count>1){
-	node* temp;
-    temp=tail;
+	node* temp=tail; //declaring a pointer to point the element which has to be deleted
+	if(count>1){ //or if there is more than one element in the list
 	tail=head;
 	for (int i=2; i<count; i++){
 		tail=tail->next;
 	}
 	tail->next=NULL;
-	delete temp;
-	count--;
+	delete temp; //deleting temp
+	count--; //decrementing count as one item has been deleted
 	}
 	else if(count==1){
-		head=NULL;
-		node* temp =tail;
+		head=NULL; //making the linke list empty
 		tail=NULL;
-		delete temp;
+		delete temp; //deleting the temp or the last object
 		count --;
 	}
 	else cout<<"There is nothing to delete."<<endl;
 }
 void l_list::delete_at(int pos){
-	if (pos<=count && count!=1 && pos!=1){
-	node* temp=NULL;
+	node* temp=head;
+	if (pos<=count && count!=1 && pos!=1){ //if we are not adding element in a linked list containing more than one element and position of the insertion is not 1 
 	node* previous=head;
 	for (int i=2; i<pos; i++){
-		previous=previous->next;
+		previous=previous->next; //this loop is to reach the nth node wher n-1 =pos
 	}	   
-	temp =previous->next;
-	previous->next=temp->next;
-	delete temp;
-	count --;
+	temp =previous->next; //pointing temp to the nt  element
+	previous->next=temp->next; //linking the n-1th element to n+1th element to break the link with temp
+	delete temp; //deleting temp
+	count --; //decrement count as one item deleted;
 	}
 	else if (pos==1 && count >1){
-		node *temp=head;
 		head =head->next;
 		delete temp;
 		count --;
 	}
-	else if(count==1){
-		node* temp;
-		head =NULL;
-		temp = tail;
+	else if(count==1){ //if there is only one node at the linked list 
+		node* temp; //declaring pointer to point the element ought to be deleted
+		head =NULL; //making the link empty
+		temp = tail; //pointing the temp to tail because to delete the remaining object we need its address
 		tail=NULL;
-		delete temp;
+		delete temp;//deleted object
 		count--;
 	}
 	else cout<<"You don't have "<<pos<<"th element in linked list."<<endl;
 }
 void l_list::show(){
-	node* temp=head;
-	if(head== NULL){
+	node* temp=head; //declaring a new pointer to point the nodes which have to be shown
+	if(head== NULL){ //if the link list is empty
 	cout<<"Oops..Nothing is here to print."<<endl;
 	}
 	else{
-	while(temp!=NULL){
-	   	cout<<temp->data<<" -> ";
-		temp=temp->next;
+	while(temp!=NULL){ //untill reach the last element// the last element's next is NULL
+	   	cout<<temp->data<<" -> "; //showing the data of the nodes as mentioned
+		temp=temp->next; //proceeding to next element
 		
 	}
 	cout<<endl;
 	}
 }
+//Thank you 
