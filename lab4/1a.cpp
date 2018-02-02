@@ -1,15 +1,15 @@
 #include<iostream>
 using namespace std;
 
-class node{
+class node{ //node containing a data and a pointer of node type to link the next element
 	public:
 	float data; 
 	node* next;
 };
-class stackll{
+class stackll{ //class of stack containing a bottom and top to represent the linklist
 	node* bottom, *top; 
 	public:
-	stackll(){
+	stackll(){ //constructor of stack
 		bottom = NULL;
 		top = NULL;
 	}
@@ -24,30 +24,30 @@ int main(){
 	int num;
 	cin>>num;
 	int data;
-	for(int i=0; i<num; i++){
-		cin>>data;	
-		stack.push(data);
+	for(int i=0; i<num; i++){ //loop to recursively take the value of data
+		cin>>data; 	
+		stack.push(data); //pushing the data to stack by calling the push function 
 	}
-	stack.show();
+	stack.show(); //calling the show function 
 	cout<<"number of data you want to delete"<<endl;	
 	cin>>num;
-	for(int i=0; i<num; i++){
-		stack.pop();
+	for(int i=0; i<num; i++){ //popping the element recursively
+		stack.pop(); //calling the pop function
 	}
-	stack.show();
+	stack.show(); //showing the stack
 	return 0; 
 }
  
 void stackll::push(float data){
-	node* temp =new node;
-	temp ->data = data;
+	node* temp =new node; //creating a node object
+	temp ->data = data; //putting the data;
 	temp->next=NULL;
-	if (bottom ==NULL){
+	if (bottom ==NULL){ //when the stack is empty
 		bottom =temp ;
 		top =temp;
 	}	
-	else {
-		top->next =temp;	
+	else { //when the stack is non-empty
+		top->next =temp;	 //
 		top =temp;
 	}
 }
