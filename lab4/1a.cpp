@@ -47,21 +47,21 @@ void stackll::push(float data){
 		top =temp;
 	}	
 	else { //when the stack is non-empty
-		top->next =temp;	 //
-		top =temp;
+		top->next =temp;	 //making link with newly created object with stack 
+		top =temp; //pointing the top at the newly created object
 	}
 }
 void stackll::pop(){
-	if (bottom==NULL){
+	if (bottom==NULL){ //if the stack is underflow
 		cout<<"This stack is empty you can't pop any more"<<endl;
 	}
-	else if(bottom==top){
+	else if(bottom==top){ //if there is only one element
 		node* temp =bottom;
-		delete temp;
+		delete temp; 
 		bottom =NULL;
 		top= NULL;
 	}
-	else {
+	else { //if stack contains more than one element
 		node* temp=bottom;
 		while(temp->next !=top &&  temp->next!=NULL){
 			temp =temp->next;
@@ -71,16 +71,16 @@ void stackll::pop(){
 		delete temp;
 	}
 }
-void stackll::show(){
-	node* temp =bottom;
-	if(bottom==NULL){
-	cout<<"there is nothing to show"<<endl;
+void stackll::show(){ //function to print stack
+	node* temp =bottom; 
+	if(bottom==NULL){ //if the stack is underflow
+	cout<<"there is nothing to show"<<endl; 
 	}
 	else {
-		while(temp!=top){
+		while(temp!=top){ //while temp is not reached the top 
 		cout<<temp->data<<"->";
-		temp=temp->next;	
+		temp=temp->next;   //traversing to top 	
 		}
-		cout<<temp->data<<endl;
+		cout<<temp->data<<endl; //print ing the last element
 	}
 }
