@@ -5,7 +5,7 @@
 using namespace std;
 
 int bsearch( node* lnode, node* rnode, int key,int lindex, int rindex){
-	if(lindex!=rindex){ 
+	if(lindex!=rindex && key<=rnode->data && key >=lnode->data){ 
 		int middle=(lindex+rindex)/2; //assigning middle element 
 		node* temp=lnode; //assigning temp as lnode
 		for(int i=0;i<(rindex-lindex)/2;i++){ //(rindex-lindex)/2 gives the number of loop to go to the middle node
@@ -15,7 +15,7 @@ int bsearch( node* lnode, node* rnode, int key,int lindex, int rindex){
 			bsearch(lnode, temp, key,lindex,middle); //call revursive function for left part of middle
 		}
 		else if(key>temp->data){ //if the middle element is bigger than key 
-			bsearch(temp,rnode,key,middle,rindex); //call revursive function for right  part of middle
+			bsearch(temp->next,rnode,key,middle+1,rindex); //call revursive function for right  part of middle
 
 		}
 		else return middle+1; //if the middle element is equal to the key then returning the index of middle
