@@ -52,6 +52,10 @@ int main(){
 	cout<<"tree is grown, check it by pressing any key and enter"<<endl;
 	cin>>num;
 	t.show();
+	cout<<"Enter a value to search in the tree"<<endl;
+	int key;
+	cin>>key;
+	t.search(key);
 	return 0;
 }
 void btree::insert(int d){
@@ -111,3 +115,22 @@ void  btree::show_A(node* temp){
 void btree::show(){
 	show_A(root);
 }
+int btree::search(int key){
+	node* temp=root;
+	while(temp!=NULL){
+		if(key>temp->data){
+			temp=temp->right;
+		}
+		else if(key<temp->data){
+			temp=temp->left;
+		}
+		else {
+			cout<<"This data exists in the tree"<<endl;
+			break;
+		}
+	}
+	if(temp==NULL){
+		cout<<"Value is not present in tree"<<endl;
+	}
+}
+
