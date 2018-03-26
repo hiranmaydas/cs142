@@ -12,6 +12,7 @@ class node{
 
 class btree{
 	node *root;
+	int number=0;
 	public:
 	btree(){
 		root=NULL;
@@ -24,17 +25,18 @@ class btree{
 };
 
 int main(){
-	btree t;
-	t.insert(7);
-	t.insert(9);
-	t.insert(5);
-	t.insert(6);
-	t.show();
-/*	cout<<"this is a program to grow tree and then maintain it"<<endl;
+	cout<<"this is a program to grow tree and then maintain it"<<endl;
 	cout<<"We will provide necessary nutrients to it , but you have to command to grow it."<<endl;
 	cout<<"buying seed..\nDone."<<endl;
 	btree t;
-	cout<<"this tree need values to make it branches and leaves, Please provide values when asked"<<endl;
+	cout<<"this tree needs values to make it branches and leaves, Please provide values when asked"<<endl;
+	cout<<"We are showing you the tree"<<endl;
+	t.show();
+	cout<<"Enter one value to make the tree born"<<endl;
+	int data;
+	cin>>data;
+	t.insert(data);
+	t.show();
 	cout<<"\n\n\n How much values  you want to enter?"<<endl;
 	int num=0;
 	cin>>num;
@@ -43,9 +45,13 @@ int main(){
 		int d;
 		cin>>d;
 		t.insert(d);
+		if(i==num){
+			break;
+		}
 	}
-	cout<<"tree is grown, check it by pressing any key"<<endl;
-	t.show();*/
+	cout<<"tree is grown, check it by pressing any key and enter"<<endl;
+	cin>>num;
+	t.show();
 	return 0;
 }
 void btree::insert(int d){
@@ -53,44 +59,52 @@ void btree::insert(int d){
 	t->data=d;
 	if(root==NULL){
 		root=t;
-		cout<<"if two times";
 	}
 	else {
-		cout<<"else";
-		node *temp;
-		cout<<"dec";
-		temp->parent=root;
-		cout<<"before loop";
-		while(temp!=NULL){
-			cout<<"loop_insert";
-			if(d> temp->data){
-				if(temp->right==NULL){
-					t->parent=temp;
-				}
-				temp=temp->right;
+		node *next;
+		node* prev;
+		next=prev=root;
+		while(next!=NULL){
+			if(d> next->data){
+				next=next->right;
 			}
-			else if(d<temp->data){
-				t->parent=temp;
-				temp->parent=(temp->parent)->left;
+			else if(d<next->data){
+				next=next->left;
 			}
-			else cout<<"This value is already present"<<endl;
+			else {
+				cout<<"This value is already present"<<endl;
+				break;
+			}
+			if(next!=NULL){
+				prev=next;
+			}
+		}
+		t->parent=prev;
+		if(d>prev->data){
+			prev->right=t;
+		}
+		else if(d<prev->data){
+			prev->left=t;
 		}
 	}
+	number++;
 }
 void  btree::show_A(node* temp){
 	if (root==NULL){
 		cout<<"Tree has not grown from seed"<<endl;
 	}
+	if(number==1){
+		cout<<"this tree has just born the value of it's root is :"<<endl;
+	}
+
 	else{
-		if(temp->left!=NULL){
-			temp=temp->left;
-			show_A(temp);
+		if(temp==NULL){
+			return;
 		}
-		cout<<temp->data<<",";
-		if(temp->right!=NULL){
-			temp=temp->right;
-			cout<<","<<temp->data;
-			show_A(temp);
+		else{
+			show_A(temp->left);
+			cout<<temp->data<<",";
+			show_A(temp->right);
 		}
 	}
 }
