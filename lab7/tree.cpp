@@ -12,10 +12,11 @@ class node{
 
 class btree{
 	node *root;
-	int number=0;
+	int number;
 	public:
 	btree(){
 		root=NULL;
+		number=0;
 	}
 	void insert(int );
 	void show();
@@ -25,7 +26,17 @@ class btree{
 };
 
 int main(){
-	cout<<"this is a program to grow tree and then maintain it"<<endl;
+	btree t;
+	t.insert(7);
+	t.insert(3);
+	t.insert(4);
+	t.insert(6);
+	t.insert(5);
+	t.insert(11);
+	t.insert(10);
+	t.insert(13);
+	t.del(6);
+/*	cout<<"this is a program to grow tree and then maintain it"<<endl;
 	cout<<"We will provide necessary nutrients to it , but you have to command to grow it."<<endl;
 	cout<<"buying seed..\nDone."<<endl;
 	btree t;
@@ -56,6 +67,7 @@ int main(){
 	int key;
 	cin>>key;
 	t.search(key);
+	*/
 	return 0;
 }
 void btree::insert(int d){
@@ -127,6 +139,61 @@ int btree::search(int key){
 		else {
 			cout<<"This data exists in the tree"<<endl;
 			break;
+		}
+	}
+	if(temp==NULL){
+		cout<<"Value is not present in tree"<<endl;
+	}
+}
+
+void btree::del(int key){
+	node* temp=root;
+	while(temp!=NULL){
+		if(key>temp->data){
+			temp=temp->right;
+		}
+		else if(key<temp->data){
+			temp=temp->left;
+		}
+		else {
+			node* tmp=temp;
+			if(tmp->right!=NULL){
+				tmp=tmp->right;
+			
+				while(tmp->left!=NULL){
+					tmp=tmp->left;
+				}
+				temp->data=tmp->data;
+				tmp->parent->left=tmp->right;
+				if(tmp->right!=NULL){
+				   tmp->right->parent=tmp->parent;
+				}
+			
+			}
+			else if(tmp->left!=NULL){
+				tmp=tmp->left;
+				while(tmp->right!=NULL){
+					tmp=tmp->right;
+				}
+				temp->data=tmp->data;
+				tmp->parent->right=tmp->left;
+				if(tmp->left!=NULL){
+					tmp->left->parent=tmp->parent;
+				}
+				
+
+			}
+			else{
+				if(tmp->data<temp->parent->data){
+					tmp->parent->left=NULL;
+				}
+				else tmp->parent->right=NULL;
+			}
+			delete tmp;
+			cout<<"Deleted"<<endl;
+			break;
+
+
 		}
 	}
 	if(temp==NULL){
