@@ -27,6 +27,7 @@ class btree{
 	int greatest();
 	void range_s(int,int,node*);
 	void range(int,int);
+	int count_node();
 };
 
 int main(){
@@ -41,6 +42,7 @@ int main(){
 	t.insert(13);
 	t.del(6);
 	t.range(3,10);
+	cout<<"Number of node is: "<<t.count_node()<<endl;
 /*	cout<<"this is a program to grow tree and then maintain it"<<endl;
 	cout<<"We will provide necessary nutrients to it , but you have to command to grow it."<<endl;
 	cout<<"buying seed..\nDone."<<endl;
@@ -197,10 +199,11 @@ void btree::del(int key){
 			delete tmp;
 			cout<<"Deleted"<<endl;
 			break;
-
+			number--;
 
 		}
 	}
+
 	if(temp==NULL){
 		cout<<"Value is not present in tree"<<endl;
 	}
@@ -240,4 +243,6 @@ void btree::range_s(int a, int b,node* temp){
 void btree::range(int a, int b){
 	range_s(a,b,root);
 }
-
+int btree::count_node(){
+	return number;
+}
