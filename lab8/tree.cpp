@@ -28,21 +28,27 @@ class btree{
 	void range_s(int,int,node*);
 	void range(int,int);
 	int count_node();
+	int count_node2(node*);
+	int leaf_count();
+	void show_special_node();
 };
 
 int main(){
 	btree t;
 	t.insert(7);
 	t.insert(3);
+	t.insert(5);
 	t.insert(4);
 	t.insert(6);
-	t.insert(5);
-	t.insert(11);
-	t.insert(10);
-	t.insert(13);
-	t.del(6);
+	t.insert(20);
+	t.insert(15);
+	t.insert(25);
+	t.insert(17);
+	cout<<"showing the data from 3 to 10"<<endl;
 	t.range(3,10);
 	cout<<"Number of node is: "<<t.count_node()<<endl;
+	cout<<"Details of special nodes"<<endl;
+	t.show_special_node();
 /*	cout<<"this is a program to grow tree and then maintain it"<<endl;
 	cout<<"We will provide necessary nutrients to it , but you have to command to grow it."<<endl;
 	cout<<"buying seed..\nDone."<<endl;
@@ -243,6 +249,29 @@ void btree::range_s(int a, int b,node* temp){
 void btree::range(int a, int b){
 	range_s(a,b,root);
 }
+int leaf_number=0;
 int btree::count_node(){
 	return number;
+}
+int btree::count_node2(node* temp){
+	if(temp==NULL){
+		}
+	else {
+		count_node2(temp->left);
+		if(temp->right==NULL and temp->left==NULL){
+			leaf_number++;
+		}
+		count_node2(temp->right);
+	}
+	return leaf_number;
+}
+int btree::leaf_count(){
+	return count_node2(root);
+	leaf_number=0;
+}
+
+void btree::show_special_node(){
+	int l=leaf_count();
+	cout<<"leaf node: "<<l<<endl;
+	cout<<"internal node:"<<number-l<<endl;
 }
